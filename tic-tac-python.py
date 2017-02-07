@@ -1,4 +1,3 @@
-import copy
 import sys
 import time
 
@@ -45,7 +44,9 @@ def create_child(node: Node, simbol: str) -> [Node]:
     free = [i for i, x in enumerate(node.table) if x == "-"]
     list_child = []
     for i in free:
-        temp = copy.deepcopy(node)
+        temp = Node()
+        temp.table = list(node.table)
+        temp.utility = node.utility
         temp.parent = node
         temp.table[i] = simbol
         list_child.append(temp)
