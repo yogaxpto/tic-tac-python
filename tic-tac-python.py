@@ -58,7 +58,7 @@ def maxi(node, simbol):
     for i in childs:
         visited_nodes += 1
         if check_win(i) == 0:
-            if i.estado.count('-') != 0:
+            if i.table.count('-') != 0:
                 if simbol == 'X':
                     i.utility = mini(i, 'O').utility
                 else:
@@ -78,7 +78,7 @@ def mini(node: Node, simbol: str) -> Node:
     for i in childs:
         visited_nodes += 1
         if check_win(i) == 0:
-            if i.estado.count('-') != 0:
+            if i.table.count('-') != 0:
                 if simbol == 'X':
                     i.utility = maxi(i, 'O').utility
                 else:
@@ -98,7 +98,7 @@ def max_ab(node: Node, simbol: str, alpha: int, beta: int):
     for i in childs:
         visited_nodes += 1
         if check_win(i) == 0:
-            if i.estado.count('-') != 0:
+            if i.table.count('-') != 0:
                 if i.utility >= alpha:
                     if simbol == 'X':
                         i.utility = min_ab(i, 'O', alpha, beta).utility
@@ -120,7 +120,7 @@ def min_ab(node: Node, simbol: str, alpha: int, beta: int):
     for i in childs:
         visited_nodes += 1
         if check_win(i) == 0:
-            if i.estado.count('-') != 0:
+            if i.table.count('-') != 0:
                 if i.utility <= beta:
                     if simbol == 'X':
                         i.utility = max_ab(i, 'O', alpha, beta).utility
@@ -206,7 +206,7 @@ def main():
         end_time = time.time()
         if check_win(node) != 0:
             winner(node, check_win(node))
-        elif node.estado.count('-') == 0:
+        elif node.table.count('-') == 0:
             break
         delta_time = end_time - start_time
         print(str(visited_nodes - a) + " nodes visited in this iteration.")
